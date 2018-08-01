@@ -1,6 +1,7 @@
 import React from 'react';
+import { reduxForm, Field } from 'redux-form';
 
-export default class DeliveryForm extends React.Component {
+export class DeliveryForm extends React.Component {
 
   render() {
     return (
@@ -8,17 +9,17 @@ export default class DeliveryForm extends React.Component {
         <h2>Report a problem with your delivery</h2>
         <form>
           <label htmlFor="trackingNumber">Tracking number</label>
-          <input type="text" name="trackingNumber" id="trackingNumber" />
+          <Field component="input" type="text" name="trackingNumber" id="trackingNumber" />
           <label htmlFor="issue">What is your issue?</label>
-          <select name="issue" id="issue">
+          <Field component="select" name="issue" id="issue">
             <option>My delivery hasn't arrived</option>
             <option>The wrong item was delivered</option>
             <option>Part of my order was missing</option>
             <option>Some of my order arrived damaged</option>
             <option>Other (give details below)</option>
-          </select>
+          </Field>
           <label htmlFor="details">Give more details (optional)</label>
-          <textarea name="details" id="details" />
+          <Field component="textarea" name="details" id="details" />
           <button type="submit">Submit</button>
         </form>
 
@@ -26,3 +27,7 @@ export default class DeliveryForm extends React.Component {
     );
   }
 }
+
+export default reduxForm({
+  form: 'delivery'
+})(DeliveryForm);
