@@ -1,5 +1,5 @@
 import React from 'react';
-import { reduxForm, Field, SubmissionError } from 'redux-form';
+import { reduxForm, Field, SubmissionError, focus } from 'redux-form';
 
 import Input from './Input';
 import { DELIVERY_FORM_SUBMIT_URL } from '../config';
@@ -106,7 +106,14 @@ export class DeliveryForm extends React.Component {
             id="details"
             label="Give more details (optional)"
           />
-          <button type="submit">Submit</button>
+          <button
+            type="submit"
+            disabled={
+              this.props.pristine ||
+              this.props.submitting
+            }>
+            Submit
+          </button>
         </form>
 
       </div>
@@ -115,5 +122,7 @@ export class DeliveryForm extends React.Component {
 }
 
 export default reduxForm({
-  form: 'delivery'
+  form: 'delivery',
+  onSubmitFail: (errors, dispatch) =>
+    dispatch(focus('delivery', Object.keys(errors)[0]))
 })(DeliveryForm);
