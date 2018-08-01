@@ -1,0 +1,1 @@
+export const DELIVERY_FORM_SUBMIT_URL = process.env.DELIVERY_FORM_SUBMIT_URL || 'https://us-central1-delivery-form-api.cloudfunctions.net/api/report';
